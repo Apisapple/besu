@@ -295,7 +295,7 @@ configure(allprojects - project(':platform')) {
       check('EqualsGetClass', CheckSeverity.OFF)
       // We like to use futures with no return values.
       check('FutureReturnValueIgnored', CheckSeverity.OFF)
-      // We use the JSR-305 annotations instead of the Google annotations.
+      // We use the JSpecify annotations instead of the Google annotations.
       check('ImmutableEnumChecker', CheckSeverity.OFF)
       // This is a style check instead of an error-prone pattern.
       check('UnnecessaryParentheses', CheckSeverity.OFF)
