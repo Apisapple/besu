@@ -79,8 +79,8 @@ public final class BesuVersionUtils {
   /**
    * Generate version-only Besu version
    *
-   * @return Besu version in format such as "v23.1.0" or "v23.1.1-dev-ac23d311", or {@value UNKNOWN}
-   *     if not available
+   * @return Besu version in format such as "v23.1.0" or "v23.1.1-dev-ac23d311", or {@value
+   *     #UNKNOWN} if not available
    */
   public static String shortVersion() {
     return VERSION;
@@ -122,7 +122,7 @@ public final class BesuVersionUtils {
   /**
    * Generate the commit hash for this besu version
    *
-   * @return the commit hash for this besu version, or {@value UNKNOWN} if not available
+   * @return the commit hash for this besu version, or {@value #UNKNOWN} if not available
    */
   public static String commit() {
     return COMMIT;
