@@ -16,6 +16,8 @@ package org.hyperledger.besu.services.tasks;
 
 import java.io.Closeable;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * The interface Task collection.
  *
@@ -35,6 +37,7 @@ public interface TaskCollection<T> extends Closeable {
    *
    * @return The task to be processed.
    */
+  @Nullable
   Task<T> remove();
 
   /**

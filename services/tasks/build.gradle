@@ -28,10 +28,25 @@ jar {
   }
 }
 
+compileJava {
+  options.errorprone {
+    check('NullAway', net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
+    option('NullAway:AnnotatedPackages', 'org.hyperledger.besu.services.tasks')
+  }
+}
+
+tasks.named('compileTestJava', JavaCompile).configure {
+  options.errorprone {
+    check('NullAway', net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+  }
+}
+
 dependencies {
   api project(':plugin-api')
   api project(':util')
   api 'org.slf4j:slf4j-api'
+
+  errorprone 'com.uber.nullaway:nullaway:0.13.1'
 
   compileOnly 'org.openjdk.jmh:jmh-generator-annprocess'
 
@@ -40,6 +55,8 @@ dependencies {
   implementation 'com.google.guava:guava'
   implementation 'io.vertx:vertx-core'
   implementation 'io.consensys.tuweni:tuweni-bytes'
+
+  compileOnlyApi 'org.jspecify:jspecify'
 
   testImplementation 'org.assertj:assertj-core'
   testImplementation 'org.junit.jupiter:junit-jupiter'
