@@ -37,8 +37,7 @@ public interface TaskCollection<T> extends Closeable {
    *
    * @return The task to be processed.
    */
-  @Nullable
-  Task<T> remove();
+  @Nullable Task<T> remove();
 
   /**
    * Returns the number of tasks in the queue.
