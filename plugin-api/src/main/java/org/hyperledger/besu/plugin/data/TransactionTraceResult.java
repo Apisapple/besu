@@ -19,6 +19,8 @@ import org.hyperledger.besu.datatypes.Hash;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Represents the result of tracing a transaction, including its status and optional error message.
  */
@@ -36,10 +38,10 @@ public class TransactionTraceResult {
 
   private final Hash txHash;
   private final Status status;
-  private final String errorMessage;
+  private final @Nullable String errorMessage;
 
   private TransactionTraceResult(
-      final Hash txHash, final Status status, final String errorMessage) {
+      final Hash txHash, final Status status, final @Nullable String errorMessage) {
     this.txHash = txHash;
     this.status = status;
     this.errorMessage = errorMessage;
