@@ -14,6 +14,20 @@
 import java.security.MessageDigest
 
 apply plugin: 'java-library'
+
+compileJava {
+  options.errorprone {
+    check('NullAway', net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
+    option('NullAway:AnnotatedPackages', 'org.hyperledger.besu.plugin')
+  }
+}
+
+tasks.named('compileTestJava', JavaCompile).configure {
+  options.errorprone {
+    check('NullAway', net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+  }
+}
+
 jar {
   archiveBaseName = calculateArtifactId(project)
   manifest {
@@ -35,6 +49,9 @@ dependencies {
   api 'io.consensys.tuweni:tuweni-units'
   api 'com.google.guava:guava'
   api project(':evm')
+  errorprone 'com.uber.nullaway:nullaway'
+
+  compileOnlyApi 'org.jspecify:jspecify'
   compileOnly 'io.vertx:vertx-core'
 }
 

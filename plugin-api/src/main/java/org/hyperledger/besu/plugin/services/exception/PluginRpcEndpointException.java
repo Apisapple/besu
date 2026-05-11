@@ -16,13 +16,15 @@ package org.hyperledger.besu.plugin.services.exception;
 
 import org.hyperledger.besu.plugin.services.rpc.RpcMethodError;
 
+import org.jspecify.annotations.Nullable;
+
 /** Base exception class for problems encountered in the RpcEndpointService. */
 public class PluginRpcEndpointException extends RuntimeException {
   /** The error */
   private final RpcMethodError rpcMethodError;
 
   /** The data associated with the exception */
-  private final String data;
+  private final @Nullable String data;
 
   /**
    * Constructs a new PluginRpcEndpointException exception with the specified error.
@@ -40,7 +42,8 @@ public class PluginRpcEndpointException extends RuntimeException {
    * @param data the data associated with the exception that could be parsed to extract more
    *     information to return in the error response.
    */
-  public PluginRpcEndpointException(final RpcMethodError rpcMethodError, final String data) {
+  public PluginRpcEndpointException(
+      final RpcMethodError rpcMethodError, final @Nullable String data) {
     this(rpcMethodError, data, null);
   }
 
@@ -56,7 +59,9 @@ public class PluginRpcEndpointException extends RuntimeException {
    *     unknown.)
    */
   public PluginRpcEndpointException(
-      final RpcMethodError rpcMethodError, final String data, final Throwable cause) {
+      final RpcMethodError rpcMethodError,
+      final @Nullable String data,
+      final @Nullable Throwable cause) {
     super(rpcMethodError.getMessage(), cause);
     this.rpcMethodError = rpcMethodError;
     this.data = data;
@@ -76,7 +81,7 @@ public class PluginRpcEndpointException extends RuntimeException {
    *
    * @return data as string, could be null.
    */
-  public String getData() {
+  public @Nullable String getData() {
     return data;
   }
 }

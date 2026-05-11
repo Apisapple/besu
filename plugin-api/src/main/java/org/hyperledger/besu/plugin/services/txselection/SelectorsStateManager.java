@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
@@ -88,7 +89,7 @@ public class SelectorsStateManager {
    */
   @SuppressWarnings("unchecked")
   public <T> T getSelectorWorkingState(final TransactionSelector selector) {
-    return (T) uncommitedStates.getLast().get(selector).get();
+    return (T) getSelectorState(uncommitedStates.getLast(), selector).get();
   }
 
   /**
@@ -100,7 +101,8 @@ public class SelectorsStateManager {
    */
   @SuppressWarnings("unchecked")
   public <T> void setSelectorWorkingState(final TransactionSelector selector, final T newState) {
-    ((SelectorState<T, StateDuplicator<T>>) uncommitedStates.getLast().get(selector)).set(newState);
+    ((SelectorState<T, StateDuplicator<T>>) getSelectorState(uncommitedStates.getLast(), selector))
+        .set(newState);
   }
 
   /**
@@ -112,7 +114,7 @@ public class SelectorsStateManager {
    */
   @SuppressWarnings("unchecked")
   public <T> T getSelectorCommittedState(final TransactionSelector selector) {
-    return (T) committedState.get(selector).get();
+    return (T) getSelectorState(committedState, selector).get();
   }
 
   /**
@@ -139,6 +141,13 @@ public class SelectorsStateManager {
       return committedState;
     }
     return uncommitedStates.getLast();
+  }
+
+  private SelectorState<?, ? extends StateDuplicator<?>> getSelectorState(
+      final Map<TransactionSelector, SelectorState<?, ? extends StateDuplicator<?>>> states,
+      final TransactionSelector selector) {
+    checkState(states.containsKey(selector), "Selector state not found for selector %s", selector);
+    return Objects.requireNonNull(states.get(selector));
   }
 
   /**

@@ -17,6 +17,8 @@ package org.hyperledger.besu.plugin.data;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Represent the result of the selection process of a candidate transaction, during the block
  * creation phase.
@@ -246,7 +248,7 @@ public class TransactionSelectionResult {
    * @param status the selection result status
    * @param invalidReason string with a custom invalid reason
    */
-  protected TransactionSelectionResult(final Status status, final String invalidReason) {
+  protected TransactionSelectionResult(final Status status, final @Nullable String invalidReason) {
     this.status = status;
     this.maybeInvalidReason = Optional.ofNullable(invalidReason);
   }

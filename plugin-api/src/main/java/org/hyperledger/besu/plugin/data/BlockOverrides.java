@@ -25,6 +25,7 @@ import java.util.function.Function;
 
 import org.apache.tuweni.bytes.Bytes;
 import org.apache.tuweni.bytes.Bytes32;
+import org.jspecify.annotations.Nullable;
 
 /** BlockOverrides represents the block overrides for a block. */
 public class BlockOverrides {
@@ -253,19 +254,19 @@ public class BlockOverrides {
 
   /** Builder for BlockOverrides. */
   public static class Builder {
-    private Long timestamp;
-    private Long blockNumber;
-    private Hash blockHash;
-    private Long gasLimit;
-    private Address feeRecipient;
-    private Wei baseFeePerGas;
-    private Wei blobBaseFee;
-    private Hash stateRoot;
-    private BigInteger difficulty;
-    private Bytes extraData;
-    private Bytes32 mixHashOrPrevRandao;
-    private Function<Long, Hash> blockHashLookup;
-    private Bytes32 parentBeaconBlockRoot;
+    private @Nullable Long timestamp;
+    private @Nullable Long blockNumber;
+    private @Nullable Hash blockHash;
+    private @Nullable Long gasLimit;
+    private @Nullable Address feeRecipient;
+    private @Nullable Wei baseFeePerGas;
+    private @Nullable Wei blobBaseFee;
+    private @Nullable Hash stateRoot;
+    private @Nullable BigInteger difficulty;
+    private @Nullable Bytes extraData;
+    private @Nullable Bytes32 mixHashOrPrevRandao;
+    private @Nullable Function<Long, Hash> blockHashLookup;
+    private @Nullable Bytes32 parentBeaconBlockRoot;
 
     /** Constructs a new Builder instance. */
     public Builder() {}
