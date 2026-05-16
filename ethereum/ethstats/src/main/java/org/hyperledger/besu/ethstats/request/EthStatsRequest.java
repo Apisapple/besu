@@ -37,7 +37,7 @@ public class EthStatsRequest {
   public static final String EMIT_FIELD = "emit";
 
   @JsonProperty(EMIT_FIELD)
-  private List<Object> emit;
+  private List<Object> emit = List.of();
 
   private EthStatsRequest() {}
 
@@ -49,7 +49,7 @@ public class EthStatsRequest {
    */
   public EthStatsRequest(final Type type, final Object... parameters) {
     this.emit =
-        Stream.concat(Stream.of(type.value), Stream.of(parameters)).collect(Collectors.toList());
+        Stream.concat(Stream.of(type.value), Stream.of(parameters)).toList();
   }
 
   /**
