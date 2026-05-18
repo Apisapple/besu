@@ -45,7 +45,6 @@ tasks.named('compileTestJava', JavaCompile).configure {
 dependencies {
   api 'org.slf4j:slf4j-api'
 
-  compileOnly 'org.jspecify:jspecify'
 
   implementation 'com.fasterxml.jackson.core:jackson-databind'
   implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
